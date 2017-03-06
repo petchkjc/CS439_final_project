@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<center>
+<h1>My Gallery</h1>
+	<a href="{% url 'clear' %}" id="Countdown" > Try Again </a>
+	<div class="row">
+		<img src="{{image_show.image.url}}" height="150" width="150"></h1>
+
+		<!-- <a href="/my_gallery/">Back</a> -->
+	</div>
+	<h2>Choose again !</h2>
+</center>
+
+<div class="col-sm-1"></div>
+	<center>
+		<div class="col-sm-10">
+					{% for i in image_list|slice:":10" %}
+							<a href="{% url 'image' i.id %} ">
+								<img src="{{i.image.url}}"  height="195" width="195">
+							</a>
+					{% endfor %}
+		</div>
+	</center>
+<div class="col-sm-1"></div>
+
+<script>
+	var downloadButton = document.getElementById("Countdown");
+	var counter = 10;
+	var newElement = document.createElement("p");
+	newElement.innerHTML = "Choose your favorite Picture in 10 seconds.";
+	var id;
+	downloadButton.parentNode.replaceChild(newElement, downloadButton);
+	id = setInterval(function() {
+		counter--;
+		if(counter < 0) {
+			newElement.parentNode.replaceChild(downloadButton, newElement);
+			clearInterval(id);
+		} else {
+			newElement.innerHTML = "Choose your favorite Picture in " + counter.toString() + " seconds.";
+		}
+	}, 1000);
+</script>
+{% endblock %}
