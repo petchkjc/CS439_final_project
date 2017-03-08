@@ -55,7 +55,7 @@ def Sessions(request,imageid="1"):
 	print type(listdb)
 
 	if len(listdb)==1:
-		request.session.set_expiry(10)
+		request.session.set_expiry(20)
 	listdb.append(imageid)
 
 	request.session["image_id"] = listdb
